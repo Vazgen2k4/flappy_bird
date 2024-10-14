@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "ball.h"
-#include "bird.h"
+#include "models/bird/bird.h"
 
 
 

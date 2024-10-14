@@ -30,3 +30,5 @@ Bird::Bird(const char* sourse) : x(100), y(100) {
 void Bird::Update() {}
 
 void Bird::Draw() const { DrawTexture(texture, x, y, WHITE); }
+
+
