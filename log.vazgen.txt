@@ -1,0 +1,31 @@
+[INFO]: [01:55:15] Init window
+[INFO]: [01:55:15] Init Bird
+[INFO]: [01:55:15] Load bird sprite
+[INFO]:[01:56:08] Init window
+[INFO]:[01:56:08] Init Bird
+[INFO]:[01:56:08] Load bird sprite
+[INFO]:[02:03:17] Init window
+[INFO]:[02:03:17] Init Bird
+[INFO]:[02:03:17] Load bird sprite
+[INFO]:[02:03:17] Bird width is [34]
+[INFO]:[02:03:17] Bird height is [24]
+[INFO]:[02:10:56] Init window
+[INFO]:[02:10:56] Init Bird
+[INFO]:[02:10:56] Load bird sprite
+[INFO]:[02:10:56] Bird width is [34.000000]
+[INFO]:[02:10:56] Bird height is [24.000000]
+[INFO]:[02:14:28] Init window
+[INFO]:[02:14:28] Init Bird
+[INFO]:[02:14:28] Load bird sprite
+[INFO]:[02:14:28] Bird width is [34.000000]
+[INFO]:[02:14:28] Bird height is [24.000000]
+[INFO]:[02:16:38] Init window
+[INFO]:[02:16:38] Init Bird
+[INFO]:[02:16:38] Load bird sprite
+[INFO]:[02:16:38] Bird width is [34.000000]
+[INFO]:[02:16:38] Bird height is [24.000000]
+[INFO]:[03:13:10] Init window
+[INFO]:[03:13:10] Init Bird
+[INFO]:[03:13:10] Load bird sprite
+[INFO]:[03:13:10] Bird width is [34.000000]
+[INFO]:[03:13:10] Bird height is [24.000000]

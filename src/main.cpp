@@ -1,39 +1,39 @@
+
 #include <raylib.h>
 #include <unistd.h>
-
 
 #include <cstring>
 #include <iostream>
 
-#include "ball.h"
-#include "models/bird/bird.h"
-
-
+#include "consts.h"
+#include "logger.h"
+#include "bird.h"
 
 int main() {
-  char cwd[1024];
-  if (getcwd(cwd, sizeof(cwd)) != nullptr) {
-    std::cout << "Текущая директория: " << cwd << std::endl;
-  }
+  Logger::initialize(Consts::LOGGER_FILE);
 
-  const Color darkGreen = {20, 160, 133, 255};
-
-  constexpr int screenWidth = 800;
-  constexpr int screenHeight = 600;
-  
-
-  InitWindow(screenWidth, screenHeight, "Vazgen project");
+  InitWindow(Consts::WIN_WIDTH, Consts::WIN_HEIGHT, "Vazgen project");
   SetTargetFPS(60);
 
-  Bird bird = {"./images/bird-01.png"};
+  Logger::log_info("Init window");
 
-
+  Bird bird = {Images::BIRD.c_str()};
+  
+  bool start = false;
+  
   while (!WindowShouldClose()) {
-    bird.Update();
-
+    
+    if(!start && IsKeyPressed(KEY_SPACE)) {
+      start = true;
+    }
+      
+    bird.Update(start);
+  
     BeginDrawing();
-    ClearBackground(darkGreen);
+
+    ClearBackground(Colors::BG);
     bird.Draw();
+
     EndDrawing();
   }
 

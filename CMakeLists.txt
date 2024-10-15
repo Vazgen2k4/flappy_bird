@@ -3,10 +3,11 @@ cmake_minimum_required(VERSION 3.10)
 # Укажите название вашего проекта
 project(FlappyBird)
 
+# Установите стандарт C++
+set(CMAKE_CXX_STANDARD 14) 
 
-# Добавьте директорию с файлами raylib
-set(CMAKE_CXX_STANDARD 14) # Убедитесь, что стандарт C++ 14 выбран
-include_directories(${RAYLIB_PATH}/include)
+# Добавьте директории с заголовочными файлами
+include_directories(src/include ${RAYLIB_PATH}/include)
 link_directories(${RAYLIB_PATH}/lib)
 
 # Найдите исходные файлы во всех подпапках
