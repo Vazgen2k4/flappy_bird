@@ -1,12 +1,12 @@
 #pragma once
-#include <string>
 #include <cstring>
+#include <string>
 
+#include "consts.h"
 #include "logger.h"
 #include "raylib.h"
-#include "consts.h"
 
-enum PipeType { UP, DOWN };
+enum PipeType { TO_UP, TO_DOWN };
 class Pipe {
  private:
   float y;
@@ -17,20 +17,19 @@ class Pipe {
   Texture2D texture;
 
  public:
-  Pipe(float x, PipeType type = PipeType::UP);
-  
+  Pipe(float x, PipeType type, float height);
+
   // Геттеры
   float getX() const;
   float getY() const;
   float getWidth() const;
   float getHeight() const;
   PipeType getType() const;
-  
+
+  void setHeight(float newHeight);
+
   // Сеттеры
   void setX(float newX);
-  void setY(float newY);
 
-  
-  void Update();
-  void Draw() const;
+  void Draw(float skale) const;
 };

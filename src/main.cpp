@@ -23,6 +23,8 @@ int main() {
   PipeController pipeController;
 
   bool start = false;
+  
+  Pipe p = {200, TO_DOWN, 500};
 
   while (!WindowShouldClose()) {
     if (!start && IsKeyPressed(KEY_SPACE)) {
@@ -31,14 +33,17 @@ int main() {
 
     bird.Update(start);
 
-    if (start) {
-      pipeController.Update();
-    }
+
+
+    // if (start) {
+    //   pipeController.Update();
+    // }
 
     BeginDrawing();
-
     ClearBackground(Colors::BG);
-    pipeController.Draw();
+
+    p.Draw(2.5);
+    // pipeController.Draw();
     bird.Draw();
 
     EndDrawing();

@@ -12,33 +12,40 @@ void PipeController::Reset() {
 }
 
 void PipeController::Update() {
-  // Обновляем таймер и добавляем новую трубу при необходимости
   spawnTimer += GetFrameTime();
   if (spawnTimer >= spawnInterval) {
     SpawnPipe();
     spawnTimer = 0;
   }
 
-  // Обновляем позиции труб
   for (auto& pipe : pipes) {
     pipe.setX(pipe.getX() - pipeSpeed * GetFrameTime());
   }
 
-  // Удаляем трубы, вышедшие за экран
   if (!pipes.empty() && pipes.front().getX() + pipes.front().getWidth() < 0) {
-    pipes.erase(pipes.begin());
+    pipes.erase(pipes.begin(), pipes.begin() + 2);
   }
 }
 
 void PipeController::Draw() const {
   for (const auto& pipe : pipes) {
-    pipe.Draw();
+    pipe.Draw(scaleFactor);
   }
 }
 
 void PipeController::SpawnPipe() {
-  float x = GetScreenWidth();  // Начальная позиция трубы справа за экраном
-  pipes.push_back(Pipe(x, PipeType::UP));
-  pipes.push_back(Pipe(x, PipeType::DOWN));
-  Logger::log_info("Spawned new pipes");
+  float x = GetScreenWidth();
+  float randomPositon = GetRandomValue(pipeGap, GetScreenHeight() - pipeGap);
+
+  float halfGap = (pipeGap / 2);
+  auto curentPipeHeight = randomPositon;
+
+  Logger::log_warning("Random position: " + to_string(randomPositon));
+
+  auto downHeight = (randomPositon - halfGap) / scaleFactor;
+  auto upHeight =
+      (GetScreenHeight() - curentPipeHeight - halfGap) / scaleFactor;
+
+  pipes.push_back({x, PipeType::TO_DOWN, downHeight});
+  pipes.push_back({x, PipeType::TO_UP, upHeight});
 }

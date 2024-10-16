@@ -11,10 +11,13 @@ class PipeController {
   void Reset();
 
  private:
+  const float spawnInterval = 1.0f;  
+  const float pipeSpeed = 200.0f;   
+  const float pipeGap = 100;   
+  const float scaleFactor = 2.5f;   
+  
   std::vector<Pipe> pipes;
   float spawnTimer;
-  const float spawnInterval = 2.0f;  // Интервал появления новых труб в секундах
-  const float pipeSpeed = 200.0f;    // Скорость движения труб
   void SpawnPipe();
 };
 

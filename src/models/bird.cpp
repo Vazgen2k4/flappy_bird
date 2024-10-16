@@ -48,8 +48,6 @@ void Bird::Update(bool start) {
 }
 
 void Bird::Draw() const {
-  Vector2 origin = {static_cast<float>(width) / 2,
-                    static_cast<float>(height) / 2};
 
-  DrawTextureEx(texture, {x, y}, angle, 1.0f, WHITE);
+  DrawTextureEx(texture, {x, y}, angle, 2.0f, WHITE);
 }
