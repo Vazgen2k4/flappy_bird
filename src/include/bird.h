@@ -11,7 +11,6 @@ class Bird {
  public:
   Bird(const char* sourse);
   void Update(bool start);
-
   void Draw() const;
 
  private:
