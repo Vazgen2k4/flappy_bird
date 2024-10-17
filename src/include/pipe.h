@@ -28,8 +28,6 @@ class Pipe {
 
   void setHeight(float newHeight);
 
-  // Сеттеры
   void setX(float newX);
-
-  void Draw(float skale) const;
+  void Draw() const;
 };

@@ -29,23 +29,20 @@ void PipeController::Update() {
 
 void PipeController::Draw() const {
   for (const auto& pipe : pipes) {
-    pipe.Draw(scaleFactor);
+    pipe.Draw();
   }
 }
 
 void PipeController::SpawnPipe() {
   float x = GetScreenWidth();
-  float randomPositon = GetRandomValue(pipeGap, GetScreenHeight() - pipeGap);
+  float screenHeight = GetScreenHeight();
+  float randomPositon = GetRandomValue(100, screenHeight - 100);
 
   float halfGap = (pipeGap / 2);
-  auto curentPipeHeight = randomPositon;
 
-  Logger::log_warning("Random position: " + to_string(randomPositon));
+  auto to_down_height = screenHeight - randomPositon + halfGap;
+  auto to_up_height = screenHeight - (to_down_height + pipeGap);
 
-  auto downHeight = (randomPositon - halfGap) / scaleFactor;
-  auto upHeight =
-      (GetScreenHeight() - curentPipeHeight - halfGap) / scaleFactor;
-
-  pipes.push_back({x, PipeType::TO_DOWN, downHeight});
-  pipes.push_back({x, PipeType::TO_UP, upHeight});
+  pipes.push_back({x, PipeType::TO_DOWN, to_down_height});
+  pipes.push_back({x, PipeType::TO_UP, to_up_height});
 }

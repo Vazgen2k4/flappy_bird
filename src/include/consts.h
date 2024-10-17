@@ -12,6 +12,8 @@ class Consts {
   static const string LOGGER_FILE;
   static const int MAX_ANGLE_ROTATE_UP;
   static const int MAX_ANGLE_ROTATE_DOWN;
+  static const float SCALE_PIPE;
+  static const float SCALE_BIRD;
 };
 
 class Colors {
