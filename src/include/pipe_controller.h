@@ -3,18 +3,19 @@
 #include <vector>
 
 #include "pipe.h"
+#include "bird.h"
 
 class PipeController {
  public:
   PipeController();
-  void Update();
+
   void Draw() const;
   void Reset();
 
+  void Update(Bird& bird, int& score, bool& gameOver);
+
  private:
-  const float spawnInterval = 1.5f;
-  const float pipeSpeed = 200.0f;
-  const float pipeGap = 10;
+
 
   std::vector<Pipe> pipes;
   float spawnTimer;

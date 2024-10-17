@@ -48,6 +48,7 @@ void Bird::Update(bool start) {
 }
 
 void Bird::Draw() const {
-
   DrawTextureEx(texture, {x, y}, angle, Consts::SCALE_BIRD, WHITE);
+
+  DrawRectangleLinesEx(getHitBox(), 2, RED);
 }

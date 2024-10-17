@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 #include "raylib.h"
 
 using namespace std;
@@ -14,6 +15,9 @@ class Consts {
   static const int MAX_ANGLE_ROTATE_DOWN;
   static const float SCALE_PIPE;
   static const float SCALE_BIRD;
+  static const float spawnInterval;
+  static const float pipeSpeed;
+  static const float pipeGap;
 };
 
 class Colors {

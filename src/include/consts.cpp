@@ -7,8 +7,12 @@ const string Consts::LOGGER_FILE = "log.txt";
 const int Consts::MAX_ANGLE_ROTATE_UP = 70;
 const int Consts::MAX_ANGLE_ROTATE_DOWN = 30;
 
-const float Consts::SCALE_PIPE = 3.0;
+const float Consts::SCALE_PIPE = 2.7;
 const float Consts::SCALE_BIRD = 1.7;
+
+const float Consts::spawnInterval = 1.5f;
+const float Consts::pipeSpeed = 200.0f;
+const float Consts::pipeGap = 150;
 
 
 // Определение статических переменных Colors

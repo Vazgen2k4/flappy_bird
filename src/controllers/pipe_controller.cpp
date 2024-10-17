@@ -11,15 +11,27 @@ void PipeController::Reset() {
   spawnTimer = 0;
 }
 
-void PipeController::Update() {
+void PipeController::Update(Bird& bird, int& score, bool& gameOver) {
   spawnTimer += GetFrameTime();
-  if (spawnTimer >= spawnInterval) {
+  if (spawnTimer >= Consts::spawnInterval) {
     SpawnPipe();
     spawnTimer = 0;
   }
 
   for (auto& pipe : pipes) {
-    pipe.setX(pipe.getX() - pipeSpeed * GetFrameTime());
+    pipe.setX(pipe.getX() - Consts::pipeSpeed * GetFrameTime());
+
+
+    if (CheckCollisionRecs(bird.getHitBox(), pipe.getHitBox())) {
+      gameOver = true;
+    }
+
+
+    if (!gameOver && pipe.getX() + pipe.getWidth() < bird.getX() &&
+        !pipe.isPassed() && pipe.getType() == TO_UP) {
+      score++;
+      pipe.setPassed(true);
+    }
   }
 
   if (!pipes.empty() && pipes.front().getX() + pipes.front().getWidth() < 0) {
@@ -36,12 +48,14 @@ void PipeController::Draw() const {
 void PipeController::SpawnPipe() {
   float x = GetScreenWidth();
   float screenHeight = GetScreenHeight();
-  float randomPositon = GetRandomValue(100, screenHeight - 100);
+  float randomPosition =
+      GetRandomValue(100, screenHeight - Consts::pipeGap - 100);
 
-  float halfGap = (pipeGap / 2);
+  float halfGap = (Consts::pipeGap / 2);
 
-  auto to_down_height = screenHeight - randomPositon + halfGap;
-  auto to_up_height = screenHeight - (to_down_height + pipeGap);
+  auto to_up_height = randomPosition;
+
+  auto to_down_height = screenHeight - randomPosition - Consts::pipeGap;
 
   pipes.push_back({x, PipeType::TO_DOWN, to_down_height});
   pipes.push_back({x, PipeType::TO_UP, to_up_height});

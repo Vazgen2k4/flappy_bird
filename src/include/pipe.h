@@ -15,6 +15,7 @@ class Pipe {
   float height;
   PipeType type;
   Texture2D texture;
+  bool passed;
 
  public:
   Pipe(float x, PipeType type, float height);
@@ -24,7 +25,11 @@ class Pipe {
   float getY() const;
   float getWidth() const;
   float getHeight() const;
+  bool isPassed() const;
+  void setPassed(bool newPassed);
   PipeType getType() const;
+
+  Rectangle getHitBox() const;
 
   void setHeight(float newHeight);
 
