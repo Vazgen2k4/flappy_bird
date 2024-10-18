@@ -1,22 +1,21 @@
 #pragma once
 
 #include <vector>
+#include <functional>
 
-#include "pipe.h"
 #include "bird.h"
+#include "pipe.h"
 
 class PipeController {
  public:
   PipeController();
 
-  void Draw() const;
+  void Draw(bool with_debug) const;
   void Reset();
 
-  void Update(Bird& bird, int& score, bool& gameOver);
+  void Update(Rectangle bird, int& score, bool& gameOver);
 
  private:
-
-
   std::vector<Pipe> pipes;
   float spawnTimer;
   void SpawnPipe();

@@ -9,7 +9,7 @@ Pipe::Pipe(float x, PipeType type, float hh)
   width = texture.width;
 
   if (type == PipeType::TO_UP) {
-    y = GetScreenHeight() - height;
+    y = Consts::WIN_HEIGHT - height;
   } else {
     y = 0;
   }
@@ -33,7 +33,7 @@ void Pipe::setHeight(float newHeight) { height = newHeight; }
 
 void Pipe::setX(float newX) { x = newX; }
 
-void Pipe::Draw() const {
+void Pipe::Draw(bool with_debug) const {
   if (type == TO_UP) {
     DrawTextureEx(texture, {x, y}, 0, Consts::SCALE_PIPE, WHITE);
   } else {
@@ -43,5 +43,7 @@ void Pipe::Draw() const {
     DrawTextureEx(texture, {x, new_y}, 0, Consts::SCALE_PIPE, WHITE);
   }
 
-  DrawRectangleLinesEx(getHitBox(), 10, RED);
+  if (with_debug) {
+    DrawRectangleLinesEx(getHitBox(), 10, RED);
+  }
 }

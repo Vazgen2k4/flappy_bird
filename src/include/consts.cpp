@@ -7,16 +7,16 @@ const string Consts::LOGGER_FILE = "log.txt";
 const int Consts::MAX_ANGLE_ROTATE_UP = 70;
 const int Consts::MAX_ANGLE_ROTATE_DOWN = 30;
 
-const float Consts::SCALE_PIPE = 2.7;
-const float Consts::SCALE_BIRD = 1.7;
+const float Consts::SCALE_PIPE = 2.0;
+const float Consts::SCALE_BIRD = 1.0;
 
 const float Consts::spawnInterval = 1.5f;
 const float Consts::pipeSpeed = 200.0f;
-const float Consts::pipeGap = 150;
+const float Consts::pipeGap = 100;
 
 
 // Определение статических переменных Colors
-const Color Colors::BG = {20, 160, 133, 255};
+const Color Colors::BG = {78, 192, 202, 255};
 
 // Определение статических переменных Images
 const string Images::IMAGES_FOLDER = "assets/images/";

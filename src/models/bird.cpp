@@ -9,18 +9,15 @@ Bird::Bird(const char* sourse) : angle(0) {
   width = texture.width;
   height = texture.height;
 
-  y = GetScreenHeight() / 2 - height / 2;
-  x = (GetScreenWidth() / 2 - width / 2) * .33;
+  Bird::Reset();
 
   Logger::log_info("Bird width is [" + std::to_string(width) + "]");
   Logger::log_info("Bird height is [" + std::to_string(height) + "]");
 }
 
-void Bird::Update(bool start) {
-  if (!start) {
-    return;
-  }
+Bird::~Bird() { UnloadTexture(texture); }
 
+void Bird::Update() {
   const float gravity = 0.5f;
   const float jumpStrength = -10.0f;
   static float velocity = 0.0f;
@@ -39,16 +36,24 @@ void Bird::Update(bool start) {
     angle = -Consts::MAX_ANGLE_ROTATE_DOWN;
   }
 
-  if (y > GetScreenHeight() - height) {
-    y = GetScreenHeight() - height;
+  if (y > Consts::WIN_HEIGHT - height) {
+    y = Consts::WIN_HEIGHT - height;
     velocity = 0;
   } else if (y < 0) {
     y = 0;
   }
 }
 
-void Bird::Draw() const {
+void Bird::Draw(bool with_debug) const {
   DrawTextureEx(texture, {x, y}, angle, Consts::SCALE_BIRD, WHITE);
 
-  DrawRectangleLinesEx(getHitBox(), 2, RED);
+  if (with_debug) {
+    DrawRectangleLinesEx(getHitBox(), 2, RED);
+  }
+}
+
+void Bird::Reset() {
+  y = (Consts::WIN_HEIGHT / 2) - height / 2;
+  x = (Consts::WIN_WIDTH / 2 - width / 2) * .33;
+  angle = 0;
 }

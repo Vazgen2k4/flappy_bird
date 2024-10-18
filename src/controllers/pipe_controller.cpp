@@ -11,7 +11,7 @@ void PipeController::Reset() {
   spawnTimer = 0;
 }
 
-void PipeController::Update(Bird& bird, int& score, bool& gameOver) {
+void PipeController::Update(Rectangle bird, int& score, bool& gameOver) {
   spawnTimer += GetFrameTime();
   if (spawnTimer >= Consts::spawnInterval) {
     SpawnPipe();
@@ -21,13 +21,11 @@ void PipeController::Update(Bird& bird, int& score, bool& gameOver) {
   for (auto& pipe : pipes) {
     pipe.setX(pipe.getX() - Consts::pipeSpeed * GetFrameTime());
 
-
-    if (CheckCollisionRecs(bird.getHitBox(), pipe.getHitBox())) {
+    if (CheckCollisionRecs(bird, pipe.getHitBox())) {
       gameOver = true;
     }
 
-
-    if (!gameOver && pipe.getX() + pipe.getWidth() < bird.getX() &&
+    if (!gameOver && pipe.getX() + pipe.getWidth() < bird.x &&
         !pipe.isPassed() && pipe.getType() == TO_UP) {
       score++;
       pipe.setPassed(true);
@@ -39,15 +37,15 @@ void PipeController::Update(Bird& bird, int& score, bool& gameOver) {
   }
 }
 
-void PipeController::Draw() const {
+void PipeController::Draw(bool with_debug) const {
   for (const auto& pipe : pipes) {
-    pipe.Draw();
+    pipe.Draw(with_debug);
   }
 }
 
 void PipeController::SpawnPipe() {
-  float x = GetScreenWidth();
-  float screenHeight = GetScreenHeight();
+  float x = Consts::WIN_WIDTH;
+  float screenHeight = Consts::WIN_HEIGHT;
   float randomPosition =
       GetRandomValue(100, screenHeight - Consts::pipeGap - 100);
 

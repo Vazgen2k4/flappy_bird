@@ -34,5 +34,5 @@ class Pipe {
   void setHeight(float newHeight);
 
   void setX(float newX);
-  void Draw() const;
+  void Draw(bool with_debug) const;
 };
