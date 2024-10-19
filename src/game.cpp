@@ -15,15 +15,13 @@ Game::Game(std::string app_icon, std::string title, int FPS)
   InitSounds();
 
   land = LoadTexture(Images::LAND.c_str());
-  ceiling = LoadTexture(Images::CEILING.c_str());
+
   sky_controller.Init(Images::SKY, 100, (float)land.height);
 }
 
 Game::~Game() {
   UnloadImage(icon);
   UnloadTexture(land);
-
-  UnloadTexture(ceiling);
   UnloadSounds();
 }
 

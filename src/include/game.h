@@ -26,10 +26,9 @@ class Game {
   bool is_collider_mode = false;
 
   Texture2D land;
-  Texture2D ceiling;
+
 
   void Draw();
-  // void DrawSky();
   void DrawLand();
 
   void Update();

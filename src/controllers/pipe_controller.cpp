@@ -27,8 +27,15 @@ void PipeController::Update(Rectangle bird, int& score, bool& gameOver) {
       PlayDeathSound();
     }
 
-    if (!gameOver && pipe.getX() + pipe.getWidth() < bird.x &&
-        !pipe.isPassed() && pipe.getType() == UP) {
+    if (pipe.getType() == UP) {
+      continue;
+    }
+
+    float pipe_border = pipe.getX() + pipe.getWidth() / 2;
+    float bird_border = bird.x + bird.width;
+    bool border_passed = pipe_border < bird_border;
+
+    if (!gameOver && border_passed && !pipe.isPassed()) {
       score++;
       pipe.setPassed(true);
       PlayPointSound();
