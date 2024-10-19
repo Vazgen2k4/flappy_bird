@@ -1,5 +1,6 @@
 #include "bird.h"
 
+
 Bird::Bird(const char* sourse) : angle(0) {
   Logger::log_info("Init Bird");
   Logger::log_info("Load bird sprite");
@@ -10,6 +11,8 @@ Bird::Bird(const char* sourse) : angle(0) {
   height = texture.height;
 
   Bird::Reset();
+
+  max_y_pos = Consts::WIN_HEIGHT - height - Consts::LAND_HEIGT;
 
   Logger::log_info("Bird width is [" + std::to_string(width) + "]");
   Logger::log_info("Bird height is [" + std::to_string(height) + "]");
@@ -22,7 +25,8 @@ void Bird::Update() {
   const float jumpStrength = -10.0f;
   static float velocity = 0.0f;
 
-  if (IsKeyPressed(KEY_SPACE)) {
+  if (IsKeyPressed(KEY_SPACE)) {    
+    PlayWingSound();
     velocity = jumpStrength;
   }
 
@@ -36,9 +40,9 @@ void Bird::Update() {
     angle = -Consts::MAX_ANGLE_ROTATE_DOWN;
   }
 
-  if (y > Consts::WIN_HEIGHT - height) {
-    y = Consts::WIN_HEIGHT - height;
+  if (y > max_y_pos) {
     velocity = 0;
+    y = max_y_pos;
   } else if (y < 0) {
     y = 0;
   }

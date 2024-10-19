@@ -18,6 +18,7 @@ class Consts {
   static const float spawnInterval;
   static const float pipeSpeed;
   static const float pipeGap;
+  static const float LAND_HEIGT;
 };
 
 class Colors {
@@ -30,8 +31,11 @@ class Images {
   static const string IMAGES_FOLDER;
   static const string BIRD;
   static const string LAND;
-  static const string PIPE_DOWN;
-  static const string PIPE_UP;
+
+  static const string PIPE_TO_DOWN;
+  static const string PIPE_TO_UP;
+  static const string PIPE;
+
   static const string SCOREBOARD;
   static const string SKY;
 };

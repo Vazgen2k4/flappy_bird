@@ -23,12 +23,15 @@ void PipeController::Update(Rectangle bird, int& score, bool& gameOver) {
 
     if (CheckCollisionRecs(bird, pipe.getHitBox())) {
       gameOver = true;
+      PlayHitSound();
+      PlayDeathSound();
     }
 
     if (!gameOver && pipe.getX() + pipe.getWidth() < bird.x &&
-        !pipe.isPassed() && pipe.getType() == TO_UP) {
+        !pipe.isPassed() && pipe.getType() == UP) {
       score++;
       pipe.setPassed(true);
+      PlayPointSound();
     }
   }
 
@@ -46,15 +49,14 @@ void PipeController::Draw(bool with_debug) const {
 void PipeController::SpawnPipe() {
   float x = Consts::WIN_WIDTH;
   float screenHeight = Consts::WIN_HEIGHT;
-  float randomPosition =
-      GetRandomValue(100, screenHeight - Consts::pipeGap - 100);
+  float randomPosition = GetRandomValue(
+      Consts::pipeGap, screenHeight - Consts::pipeGap - Consts::LAND_HEIGT);
 
   float halfGap = (Consts::pipeGap / 2);
 
-  auto to_up_height = randomPosition;
+  auto to_up_height = randomPosition - halfGap;
+  auto to_down_height = screenHeight - randomPosition - halfGap;
 
-  auto to_down_height = screenHeight - randomPosition - Consts::pipeGap;
-
-  pipes.push_back({x, PipeType::TO_DOWN, to_down_height});
-  pipes.push_back({x, PipeType::TO_UP, to_up_height});
+  pipes.push_back({x, PipeType::DOWN, to_down_height});
+  pipes.push_back({x, PipeType::UP, to_up_height});
 }

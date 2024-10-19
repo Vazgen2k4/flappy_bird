@@ -12,6 +12,8 @@ link_directories(${RAYLIB_PATH}/lib)
 
 # Найдите исходные файлы во всех подпапках
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+
 
 # Создайте исполняемый файл
 add_executable(${PROJECT_NAME} ${SOURCES})

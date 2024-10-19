@@ -4,9 +4,11 @@
 #include <cstring>
 #include <string>
 
+#include "app_sound.h"
 #include "bird.h"
 #include "consts.h"
 #include "pipe_controller.h"
+#include "sky_controller.h"
 
 class Game {
  private:
@@ -16,15 +18,20 @@ class Game {
   bool is_started = false;
   int score = 0;
   bool game_over = false;
+
   Bird* bird;
   PipeController* controller;
+  SkyController sky_controller;
 
   bool is_collider_mode = false;
 
   Texture2D land;
-  Texture2D sky;
+  Texture2D ceiling;
 
   void Draw();
+  // void DrawSky();
+  void DrawLand();
+
   void Update();
   void CheckGameOver();
   void CheckEvents();

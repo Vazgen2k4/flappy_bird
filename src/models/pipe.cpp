@@ -1,47 +1,54 @@
 #include "pipe.h"
 
-Pipe::Pipe(float x, PipeType type, float hh)
-    : x(x), type(type), height(hh), passed(false) {
-  auto source = type == PipeType::TO_UP ? Images::PIPE_UP : Images::PIPE_DOWN;
+Pipe::Pipe(float x, PipeType type, float height) : type(type), passed(false) {
+  std::string source_head;
+  std::string source_tail;
+  float y = 0;
 
-  texture = LoadTexture(source.c_str());
+  if (type == PipeType::UP) {
+    source_head = Images::PIPE_TO_DOWN;
 
-  width = texture.width;
-
-  if (type == PipeType::TO_UP) {
-    y = Consts::WIN_HEIGHT - height;
   } else {
-    y = 0;
+    source_head = Images::PIPE_TO_UP;
+    y = Consts::WIN_HEIGHT - height ;
   }
+
+  head = LoadTexture(source_head.c_str());
+  tail = LoadTexture(Images::PIPE.c_str());
+
+  hit_box = {x, y, (float)tail.width, height};
 }
 
-float Pipe::getX() const { return x; }
-float Pipe::getY() const { return y; }
-float Pipe::getWidth() const { return width; }
-float Pipe::getHeight() const { return height; }
+float Pipe::getX() const { return hit_box.x; }
+float Pipe::getY() const { return hit_box.y; }
+
+float Pipe::getWidth() const { return hit_box.width; }
+float Pipe::getHeight() const { return hit_box.height; }
+
 bool Pipe::isPassed() const { return passed; }
 void Pipe::setPassed(bool newPassed) { passed = newPassed; }
 PipeType Pipe::getType() const { return type; }
 
-Rectangle Pipe::getHitBox() const {
-  auto scaled_width = width * Consts::SCALE_PIPE;
-  auto scaled_height = height;
-  return {x, y, scaled_width, scaled_height};
-}
+Rectangle Pipe::getHitBox() const { return hit_box; }
 
-void Pipe::setHeight(float newHeight) { height = newHeight; }
-
-void Pipe::setX(float newX) { x = newX; }
+void Pipe::setX(float newX) { hit_box.x = newX; }
 
 void Pipe::Draw(bool with_debug) const {
-  if (type == TO_UP) {
-    DrawTextureEx(texture, {x, y}, 0, Consts::SCALE_PIPE, WHITE);
-  } else {
-    auto s = texture.height * Consts::SCALE_PIPE;
-    auto new_y = -abs(s - height);
+  Rectangle tail_sourse = {0, 0, (float)tail.width, (float)tail.height};
+  DrawTexturePro(tail, tail_sourse, hit_box, {0, 0}, 0, WHITE);
 
-    DrawTextureEx(texture, {x, new_y}, 0, Consts::SCALE_PIPE, WHITE);
+  Rectangle head_sourse = {0, 0, (float)head.width, (float)head.height};
+
+  float head_y = hit_box.y;
+
+  if (type == UP) {
+    head_y += hit_box.height - head.height;
   }
+
+  Rectangle head_target = {hit_box.x, head_y, (float)head.width,
+                           (float)head.height};
+
+  DrawTexturePro(head, head_sourse, head_target, {0, 0}, 0, WHITE);
 
   if (with_debug) {
     DrawRectangleLinesEx(getHitBox(), 10, RED);

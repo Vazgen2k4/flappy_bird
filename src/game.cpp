@@ -10,15 +10,21 @@ Game::Game(std::string app_icon, std::string title, int FPS)
   InitWindow(Consts::WIN_WIDTH, Consts::WIN_HEIGHT, title.c_str());
   SetTargetFPS(FPS);
   SetWindowIcon(icon);
+  
+  InitAudioDevice();
+  InitSounds();
 
   land = LoadTexture(Images::LAND.c_str());
-  sky = LoadTexture(Images::SKY.c_str());
+  ceiling = LoadTexture(Images::CEILING.c_str());
+  sky_controller.Init(Images::SKY, 100, (float)land.height);
 }
 
 Game::~Game() {
   UnloadImage(icon);
   UnloadTexture(land);
-  UnloadTexture(sky);
+
+  UnloadTexture(ceiling);
+  UnloadSounds();
 }
 
 void Game::Run() {
@@ -38,6 +44,7 @@ void Game::Run() {
     EndDrawing();
   }
 
+  CloseAudioDevice();
   CloseWindow();
 }
 
@@ -54,30 +61,28 @@ void Game::Init(Bird* bird, PipeController* controller) {
 };
 
 void Game::Draw() {
-  Rectangle land_src = {0, 0, (float)land.width, (float)land.height};
-  Rectangle land_dest = {0, Consts::WIN_HEIGHT - land.height,
-                         (float)Consts::WIN_WIDTH, (float)land.height};
-
-  auto k_sky = Consts::WIN_WIDTH / sky.width;
-
-  Rectangle sky_src = {0, 0, (float)sky.width, (float)sky.height};
-  Rectangle sky_dest = {0, land_dest.y - land_dest.height, Consts::WIN_WIDTH,
-                        (float)sky.height * k_sky};
-
-  // DrawTextureEx(sky, {50, land_dest.y - sky.height}, 0.0f, k_sky, WHITE);
-
-  DrawTexturePro(sky, sky_src, sky_dest, {0, (float)sky.height}, 0.0f, {WHITE});
+  sky_controller.Draw();
 
   bird->Draw(is_collider_mode);
   controller->Draw(is_collider_mode);
 
-  DrawTexturePro(land, land_src, land_dest, {0, 0}, 0.0f, {WHITE});
-
   DrawText(TextFormat("Score: %i", score), 10, 10, 20, WHITE);
+
+  DrawLand();
 
   if (is_collider_mode) {
     DrawText("Collider mode", 10, 30, 20, WHITE);
   }
+}
+
+void Game::DrawLand() {
+  float dist_y = Consts::WIN_HEIGHT - land.height;
+
+  Rectangle land_src = {0, 0, (float)land.width, (float)land.height};
+  Rectangle land_dest = {0, dist_y, (float)Consts::WIN_WIDTH,
+                         Consts::LAND_HEIGT};
+
+  DrawTexturePro(land, land_src, land_dest, {0, 0}, 0.0f, {WHITE});
 }
 
 void Game::Update() {
@@ -89,6 +94,7 @@ void Game::Update() {
 
   bird->Update();
   controller->Update(bird->getHitBox(), score, game_over);
+  sky_controller.Update();
 }
 
 void Game::CheckGameOver() {

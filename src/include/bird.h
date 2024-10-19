@@ -1,4 +1,6 @@
 #pragma once
+#include <app_sound.h>
+
 #include <iomanip>
 #include <iostream>
 #include <vector>
@@ -11,7 +13,7 @@ class Bird {
  public:
   Bird(const char* sourse);
   ~Bird();
-  
+
   void Update();
   void Draw(bool with_debug) const;
   // void Draw() const;
@@ -27,7 +29,6 @@ class Bird {
     auto scaled_height = height * Consts::SCALE_BIRD;
     return {x, y, scaled_width, scaled_height};
   }
-  
 
   void Reset();
 
@@ -38,4 +39,6 @@ class Bird {
   float width;
   float height;
   Texture2D texture;
+
+  float max_y_pos;
 };

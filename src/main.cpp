@@ -8,7 +8,7 @@
 #include "pipe_controller.h"
 
 int main() {
-  Logger::initialize(Consts::LOGGER_FILE);
+  // Logger::initialize(Consts::LOGGER_FILE);
   Logger::log_info("Init window");
 
   const std::string title = "Flappy Bird by Vazgen";

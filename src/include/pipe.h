@@ -6,15 +6,22 @@
 #include "logger.h"
 #include "raylib.h"
 
-enum PipeType { TO_UP, TO_DOWN };
+enum PipeType { UP, DOWN };
 class Pipe {
  private:
-  float y;
-  float x;
-  float width;
-  float height;
+  // float y;
+  // float x;
+  // float width;
+  // float height;
+
+  Rectangle hit_box;
   PipeType type;
-  Texture2D texture;
+
+  Texture2D head;
+  Texture2D tail;
+  // Vector2 origin;
+
+
   bool passed;
 
  public:
@@ -31,7 +38,7 @@ class Pipe {
 
   Rectangle getHitBox() const;
 
-  void setHeight(float newHeight);
+  // void setHeight(float newHeight);
 
   void setX(float newX);
   void Draw(bool with_debug) const;
