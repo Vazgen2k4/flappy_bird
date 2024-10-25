@@ -4,7 +4,19 @@
 #include "logger.h"
 #include "raylib.h"
 
-PipeController::PipeController() : spawnTimer(0) { Reset(); }
+PipeController::PipeController() : spawnTimer(0) {
+  Reset();
+
+  pipe = LoadTexture(Images::PIPE.c_str());
+  pipe_to_down = LoadTexture(Images::PIPE_TO_DOWN.c_str());
+  pipe_to_up = LoadTexture(Images::PIPE_TO_UP.c_str());
+}
+
+PipeController::~PipeController() {
+  UnloadTexture(pipe);
+  UnloadTexture(pipe_to_down);
+  UnloadTexture(pipe_to_up);
+}
 
 void PipeController::Reset() {
   pipes.clear();
@@ -13,6 +25,7 @@ void PipeController::Reset() {
 
 void PipeController::Update(Rectangle bird, int& score, bool& gameOver) {
   spawnTimer += GetFrameTime();
+
   if (spawnTimer >= Consts::spawnInterval) {
     SpawnPipe();
     spawnTimer = 0;
@@ -64,6 +77,6 @@ void PipeController::SpawnPipe() {
   auto to_up_height = randomPosition - halfGap;
   auto to_down_height = screenHeight - randomPosition - halfGap;
 
-  pipes.push_back({x, PipeType::DOWN, to_down_height});
-  pipes.push_back({x, PipeType::UP, to_up_height});
+  pipes.push_back({x, PipeType::DOWN, to_down_height, pipe, pipe_to_up});
+  pipes.push_back({x, PipeType::UP, to_up_height, pipe, pipe_to_down});
 }

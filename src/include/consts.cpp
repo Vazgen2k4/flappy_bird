@@ -4,6 +4,7 @@
 const int Consts::WIN_WIDTH = 900;
 const int Consts::WIN_HEIGHT = 600;
 const string Consts::LOGGER_FILE = "log.txt";
+const string Consts::BEST_SCORE_FILE = "best.txt";
 const int Consts::MAX_ANGLE_ROTATE_UP = 70;
 const int Consts::MAX_ANGLE_ROTATE_DOWN = 30;
 

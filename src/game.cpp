@@ -10,13 +10,13 @@ Game::Game(std::string app_icon, std::string title, int FPS)
   InitWindow(Consts::WIN_WIDTH, Consts::WIN_HEIGHT, title.c_str());
   SetTargetFPS(FPS);
   SetWindowIcon(icon);
-  
+
   InitAudioDevice();
   InitSounds();
 
   land = LoadTexture(Images::LAND.c_str());
-
   sky_controller.Init(Images::SKY, 100, (float)land.height);
+  best_score = ReadBestScore();
 }
 
 Game::~Game() {
@@ -27,18 +27,12 @@ Game::~Game() {
 
 void Game::Run() {
   while (!WindowShouldClose()) {
-    if (!game_over && !is_started && IsKeyPressed(KEY_SPACE)) {
-      is_started = true;
-    }
-
+    HandleInput();
     Update();
 
     BeginDrawing();
     ClearBackground(Colors::BG);
-
     Draw();
-    CheckGameOver();
-    CheckEvents();
     EndDrawing();
   }
 
@@ -46,17 +40,68 @@ void Game::Run() {
   CloseWindow();
 }
 
+void Game::HandleInput() {
+  if (!game_over && !is_started && IsKeyPressed(KEY_SPACE)) {
+    is_started = true;
+  }
+
+  if (IsKeyPressed(KEY_R) && game_over) {
+    RestartGame();
+  }
+
+  if (IsKeyPressed(KEY_C)) {
+    is_collider_mode = !is_collider_mode;
+  }
+}
+
+void Game::RestartGame() {
+  score = 0;
+  is_started = false;
+  game_over = false;
+
+  bird->Reset();
+  controller->Reset();
+}
+
 void Game::DrawTextureCenter(Texture2D texture, Color color) {
   auto x_center = (Consts::WIN_WIDTH - texture.width) / 2;
   auto y_center = (Consts::WIN_HEIGHT - texture.height) / 2;
 
-  DrawTexture(texture, x_center, y_center, WHITE);
+  DrawTexture(texture, x_center, y_center, color);
+}
+
+
+int Game::ReadBestScore() {
+  std::ifstream best_scores(Consts::BEST_SCORE_FILE);
+
+  int _score = 0;
+
+  if (best_scores.is_open()) {
+    best_scores >> _score;
+    best_scores.close();
+  }
+
+  return _score;
+}
+
+void Game::WriteBestScore(int _score) {
+  std::ofstream best_scores(Consts::BEST_SCORE_FILE,
+                            std::ios::out | std::ios::trunc);
+
+  if (!best_scores.is_open()) {
+    Logger::log_error("failed to open file " + Consts::BEST_SCORE_FILE);
+    return;
+  }
+
+  best_scores << _score;
+  Logger::log_info("The best score was update to [" + to_string(_score) + "]");
+  best_scores.close();
 }
 
 void Game::Init(Bird* bird, PipeController* controller) {
   this->bird = bird;
   this->controller = controller;
-};
+}
 
 void Game::Draw() {
   sky_controller.Draw();
@@ -64,12 +109,20 @@ void Game::Draw() {
   bird->Draw(is_collider_mode);
   controller->Draw(is_collider_mode);
 
-  DrawText(TextFormat("Score: %i", score), 10, 10, 20, WHITE);
+  DrawTextInCorner({TextFormat("Score: %i", score),
+                    TextFormat("Best Score: %i", best_score),
+                    is_collider_mode ? "Collider mode" : ""});
 
   DrawLand();
+}
 
-  if (is_collider_mode) {
-    DrawText("Collider mode", 10, 30, 20, WHITE);
+void Game::DrawTextInCorner(vector<const char*> texts) {
+  auto i = 0;
+
+  for (auto text : texts) {
+    if (text == "") continue;
+
+    DrawText(text, 10, 10 + (20 * i++), 20, WHITE);
   }
 }
 
@@ -80,38 +133,20 @@ void Game::DrawLand() {
   Rectangle land_dest = {0, dist_y, (float)Consts::WIN_WIDTH,
                          Consts::LAND_HEIGT};
 
-  DrawTexturePro(land, land_src, land_dest, {0, 0}, 0.0f, {WHITE});
+  DrawTexturePro(land, land_src, land_dest, {0, 0}, 0.0f, WHITE);
 }
 
 void Game::Update() {
-  bool can_update = is_started && !game_over;
+  if ((score > best_score) && game_over) {
+    best_score = score;
+    WriteBestScore(best_score);
+  }
 
-  if (!can_update) {
+  if (!is_started || game_over) {
     return;
   }
 
   bird->Update();
   controller->Update(bird->getHitBox(), score, game_over);
   sky_controller.Update();
-}
-
-void Game::CheckGameOver() {
-  if (!game_over) {
-    return;
-  }
-
-  if (IsKeyPressed(KEY_R)) {
-    score = 0;
-    is_started = false;
-    game_over = false;
-
-    bird->Reset();
-    controller->Reset();
-  }
-}
-
-void Game::CheckEvents() {
-  if (IsKeyPressed(KEY_C)) {
-    is_collider_mode = !is_collider_mode;
-  }
 }

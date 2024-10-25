@@ -11,6 +11,7 @@ class Consts {
   static const int WIN_WIDTH;
   static const int WIN_HEIGHT;
   static const string LOGGER_FILE;
+  static const string BEST_SCORE_FILE;
   static const int MAX_ANGLE_ROTATE_UP;
   static const int MAX_ANGLE_ROTATE_DOWN;
   static const float SCALE_PIPE;

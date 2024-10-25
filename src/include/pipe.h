@@ -1,5 +1,6 @@
 #pragma once
 #include <cstring>
+#include <functional>
 #include <string>
 
 #include "consts.h"
@@ -9,23 +10,16 @@
 enum PipeType { UP, DOWN };
 class Pipe {
  private:
-  // float y;
-  // float x;
-  // float width;
-  // float height;
-
   Rectangle hit_box;
   PipeType type;
 
-  Texture2D head;
-  Texture2D tail;
-  // Vector2 origin;
-
+  std::reference_wrapper<Texture2D> head;
+  std::reference_wrapper<Texture2D> tail;
 
   bool passed;
 
  public:
-  Pipe(float x, PipeType type, float height);
+  Pipe(float x, PipeType type, float height, Texture2D& tail, Texture2D& head);
 
   // Геттеры
   float getX() const;
@@ -34,8 +28,9 @@ class Pipe {
   float getHeight() const;
   bool isPassed() const;
   void setPassed(bool newPassed);
-  PipeType getType() const;
+  void setHeight(float newHeight);
 
+  PipeType getType() const;
   Rectangle getHitBox() const;
 
   // void setHeight(float newHeight);
