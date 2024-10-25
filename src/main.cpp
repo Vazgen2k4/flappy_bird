@@ -21,5 +21,6 @@ int main() {
   game.Init(&bird, &pipeController);
   game.Run();
 
+  Logger::close();
   return 0;
 }

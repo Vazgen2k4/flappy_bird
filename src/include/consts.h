@@ -1,8 +1,15 @@
 #pragma once
 
+#include <sys/stat.h>  // Для Unix-подобных систем
+
+#include <iostream>
 #include <string>
 
 #include "raylib.h"
+#ifdef _WIN32
+#include <direct.h>  // Для Windows
+#define mkdir _mkdir
+#endif
 
 using namespace std;
 
@@ -10,6 +17,7 @@ class Consts {
  public:
   static const int WIN_WIDTH;
   static const int WIN_HEIGHT;
+  static const string FILE_FOLDER;
   static const string LOGGER_FILE;
   static const string BEST_SCORE_FILE;
   static const int MAX_ANGLE_ROTATE_UP;
@@ -20,6 +28,8 @@ class Consts {
   static const float pipeSpeed;
   static const float pipeGap;
   static const float LAND_HEIGT;
+
+  static void CreateDirectoryIfNotExists(const std::string& dir);
 };
 
 class Colors {

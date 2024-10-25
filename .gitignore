@@ -3,4 +3,4 @@
 main
 .vscode/
 build/
-log.txt
+flappy_data*/

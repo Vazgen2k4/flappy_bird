@@ -3,8 +3,10 @@
 // Определение статических переменных Consts
 const int Consts::WIN_WIDTH = 900;
 const int Consts::WIN_HEIGHT = 600;
-const string Consts::LOGGER_FILE = "log.txt";
-const string Consts::BEST_SCORE_FILE = "best.txt";
+
+const string Consts::FILE_FOLDER = "flappy_data_vazgen/";
+const string Consts::LOGGER_FILE = FILE_FOLDER + "log.txt";
+const string Consts::BEST_SCORE_FILE = FILE_FOLDER + "best.txt";
 const int Consts::MAX_ANGLE_ROTATE_UP = 70;
 const int Consts::MAX_ANGLE_ROTATE_DOWN = 30;
 
@@ -29,3 +31,17 @@ const string Images::PIPE = Images::IMAGES_FOLDER + "pipe.png";
 
 const string Images::SCOREBOARD = Images::IMAGES_FOLDER + "scoreboard.png";
 const string Images::SKY = Images::IMAGES_FOLDER + "sky.png";
+
+void Consts::CreateDirectoryIfNotExists(const std::string& dir) {
+  struct stat info;
+
+  if (stat(dir.c_str(), &info) != 0) {
+    if (mkdir(dir.c_str()) != 0) {
+      std::cerr << "Ошибка создания директории: " << dir << std::endl;
+    }
+  } else if (info.st_mode & S_IFDIR) {
+    std::cout << "Директория уже существует: " << dir << std::endl;
+  } else {
+    std::cerr << "Ошибка: файл с таким именем уже существует." << std::endl;
+  }
+}

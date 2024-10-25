@@ -70,8 +70,8 @@ void Game::DrawTextureCenter(Texture2D texture, Color color) {
   DrawTexture(texture, x_center, y_center, color);
 }
 
-
 int Game::ReadBestScore() {
+  Consts::CreateDirectoryIfNotExists(Consts::FILE_FOLDER);
   std::ifstream best_scores(Consts::BEST_SCORE_FILE);
 
   int _score = 0;
@@ -85,6 +85,7 @@ int Game::ReadBestScore() {
 }
 
 void Game::WriteBestScore(int _score) {
+  Consts::CreateDirectoryIfNotExists(Consts::FILE_FOLDER);
   std::ofstream best_scores(Consts::BEST_SCORE_FILE,
                             std::ios::out | std::ios::trunc);
 

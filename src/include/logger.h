@@ -5,6 +5,8 @@
 #include <chrono>
 #include <iomanip>
 
+#include "consts.h"
+
 class Logger {
  private:
   static bool with_file;
@@ -20,4 +22,6 @@ class Logger {
   static void log_warning(const std::string& message);
   static void log_info(const std::string& message);
   static void close();
+  
+  
 };
