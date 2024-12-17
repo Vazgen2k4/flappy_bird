@@ -64,6 +64,8 @@ void DashBoard::Draw(bool is_colider_mode, int scores, int best_scores) {
   int x = Consts::WIN_WIDTH / 2 - DashBoard::width / 2;
   int y = Consts::WIN_HEIGHT / 2 - DashBoard::height / 2;
 
+  DrawRectangle(0, 0, Consts::WIN_WIDTH, Consts::WIN_HEIGHT, {0, 0, 0, 200});
+
   DrawTexture(scoreboard, x, y, WHITE);
   Rectangle r = {(float)x, (float)y, DashBoard::width, DashBoard::height};
   if (is_colider_mode) {
@@ -74,7 +76,7 @@ void DashBoard::Draw(bool is_colider_mode, int scores, int best_scores) {
 
   DrawText(TextFormat("%i", scores), x + Consts::DashBoard_SCORES_DX,
            y + Consts::DashBoard_SCORES_DY, Consts::FONT_SIZE, WHITE);
-           
+
   DrawText(TextFormat("%i", best_scores), x + Consts::DashBoard_SCORES_DX,
            y + Consts::Consts::DashBoard_BEST_SCORES_DY, Consts::FONT_SIZE,
            WHITE);
