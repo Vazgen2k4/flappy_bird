@@ -1,12 +1,14 @@
 #pragma once
 #include <string>
 
-#include "app_sound.h"
-#include "bird.h"
-#include "consts.h"
-#include "pipe_controller.h"
 #include "raylib.h"
-#include "sky_controller.h"
+
+#include "app_sound.hpp"
+#include "bird.hpp"
+#include "consts.hpp"
+#include "pipe_controller.hpp"
+#include "sky_controller.hpp"
+#include "dash_board.hpp"
 
 class Game {
  public:
@@ -18,7 +20,7 @@ class Game {
   void Run();
 
   // Инициализация объектов игры
-  void Init(Bird* bird, PipeController* controller);
+  void Init(Bird* bird, PipeController* controller/* , DashBoard* dashboard */);
 
  private:
   // Члены класса
@@ -30,7 +32,9 @@ class Game {
   Bird* bird;
   PipeController* controller;
   SkyController sky_controller;
-
+  
+  DashBoard dashboard;
+  
   int score = 0;
   int best_score = 0;
   bool is_started = false;
@@ -52,7 +56,6 @@ class Game {
   void DrawLand();
   // Центрированная отрисовка текстуры
   void DrawTextureCenter(Texture2D texture, Color color);
-
 
   int ReadBestScore();
   void WriteBestScore(int score);

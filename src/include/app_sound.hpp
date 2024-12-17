@@ -4,7 +4,7 @@
 #include <string>
 
 #include "raylib.h"
-#include "logger.h"
+#include "logger.hpp"
 
 extern Sound sfx_die;
 extern Sound sfx_hit;

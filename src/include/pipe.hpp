@@ -3,8 +3,8 @@
 #include <functional>
 #include <string>
 
-#include "consts.h"
-#include "logger.h"
+#include "consts.hpp"
+#include "logger.hpp"
 #include "raylib.h"
 
 enum PipeType { UP, DOWN };

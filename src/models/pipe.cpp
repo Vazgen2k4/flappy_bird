@@ -1,4 +1,4 @@
-#include "pipe.h"
+#include "pipe.hpp"
 
 Pipe::Pipe(float x, PipeType type, float height, Texture2D& tail,
            Texture2D& head)
@@ -49,6 +49,6 @@ void Pipe::Draw(bool with_debug) const {
   DrawTexturePro(head, head_sourse, head_target, {0, 0}, 0, WHITE);
 
   if (with_debug) {
-    DrawRectangleLinesEx(getHitBox(), 10, RED);
+    DrawRectangleLinesEx(getHitBox(), Consts::WIDTH_COLIDER, RED);
   }
 }

@@ -1,4 +1,4 @@
-#include "consts.h"
+#include "consts.hpp"
 
 // Определение статических переменных Consts
 const int Consts::WIN_WIDTH = 900;
@@ -31,6 +31,13 @@ const string Images::PIPE = Images::IMAGES_FOLDER + "pipe.png";
 
 const string Images::SCOREBOARD = Images::IMAGES_FOLDER + "scoreboard.png";
 const string Images::SKY = Images::IMAGES_FOLDER + "sky.png";
+
+const std::vector<std::string> Images::MEDAL_PATHS = {
+    Images::IMAGES_FOLDER + "medal_bronze.png",
+    Images::IMAGES_FOLDER + "medal_silver.png",
+    Images::IMAGES_FOLDER + "medal_gold.png",
+    Images::IMAGES_FOLDER + "medal_platinum.png",
+};
 
 void Consts::CreateDirectoryIfNotExists(const std::string& dir) {
   struct stat info;

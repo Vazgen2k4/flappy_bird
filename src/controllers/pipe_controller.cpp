@@ -1,7 +1,7 @@
-#include "pipe_controller.h"
+#include "pipe_controller.hpp"
 
-#include "consts.h"
-#include "logger.h"
+#include "consts.hpp"
+#include "logger.hpp"
 #include "raylib.h"
 
 PipeController::PipeController() : spawnTimer(0) {

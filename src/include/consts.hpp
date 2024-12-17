@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "raylib.h"
 #ifdef _WIN32
@@ -29,6 +30,16 @@ class Consts {
   static const float pipeGap;
   static const float LAND_HEIGT;
 
+  static const int MEDAL_OFFSET_X = 31;
+  static const int MEDAL_OFFSET_Y = 112;
+  
+  static const int WIDTH_COLIDER = 3;
+  static const int FONT_SIZE = 20;
+  
+  static const int  DashBoard_SCORES_DX = 175;
+  static const int  DashBoard_SCORES_DY = 105;
+  static const int  DashBoard_BEST_SCORES_DY = 145;
+
   static void CreateDirectoryIfNotExists(const std::string& dir);
 };
 
@@ -49,4 +60,6 @@ class Images {
 
   static const string SCOREBOARD;
   static const string SKY;
+
+  static const std::vector<std::string> MEDAL_PATHS;
 };

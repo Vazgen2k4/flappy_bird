@@ -1,4 +1,4 @@
-#include "bird.h"
+#include "bird.hpp"
 
 
 Bird::Bird(const char* sourse) : angle(0) {
@@ -52,7 +52,7 @@ void Bird::Draw(bool with_debug) const {
   DrawTextureEx(texture, {x, y}, angle, Consts::SCALE_BIRD, WHITE);
 
   if (with_debug) {
-    DrawRectangleLinesEx(getHitBox(), 2, RED);
+    DrawRectangleLinesEx(getHitBox(), Consts::WIDTH_COLIDER, RED);
   }
 }
 

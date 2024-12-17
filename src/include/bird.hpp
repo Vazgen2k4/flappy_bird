@@ -1,12 +1,12 @@
 #pragma once
-#include <app_sound.h>
 
 #include <iomanip>
 #include <iostream>
 #include <vector>
 
-#include "consts.h"
-#include "logger.h"
+#include "app_sound.hpp"
+#include "consts.hpp"
+#include "logger.hpp"
 #include "raylib.h"
 
 class Bird {

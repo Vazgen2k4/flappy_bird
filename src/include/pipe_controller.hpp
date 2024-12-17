@@ -3,8 +3,8 @@
 #include <vector>
 #include <functional>
 
-#include "bird.h"
-#include "pipe.h"
+#include "bird.hpp"
+#include "pipe.hpp"
 
 class PipeController {
  public:

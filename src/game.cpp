@@ -1,10 +1,11 @@
-#include "game.h"
+#include "game.hpp"
 
 Game::Game(std::string app_icon, std::string title, int FPS)
     : app_icon_path(app_icon),
       title(title),
       bird(nullptr),
-      controller(nullptr) {
+      controller(nullptr),
+      dashboard() {
   icon = LoadImage(app_icon.c_str());
 
   InitWindow(Consts::WIN_WIDTH, Consts::WIN_HEIGHT, title.c_str());
@@ -17,6 +18,7 @@ Game::Game(std::string app_icon, std::string title, int FPS)
   land = LoadTexture(Images::LAND.c_str());
   sky_controller.Init(Images::SKY, 100, (float)land.height);
   best_score = ReadBestScore();
+  dashboard.setMedalByBestScores(best_score);
 }
 
 Game::~Game() {
@@ -102,6 +104,7 @@ void Game::WriteBestScore(int _score) {
 void Game::Init(Bird* bird, PipeController* controller) {
   this->bird = bird;
   this->controller = controller;
+  this->dashboard.Init();
 }
 
 void Game::Draw() {
@@ -115,6 +118,10 @@ void Game::Draw() {
                     is_collider_mode ? "Collider mode" : ""});
 
   DrawLand();
+
+  if (game_over) {
+    dashboard.Draw(is_collider_mode, score, best_score);
+  }
 }
 
 void Game::DrawTextInCorner(vector<const char*> texts) {
@@ -123,7 +130,7 @@ void Game::DrawTextInCorner(vector<const char*> texts) {
   for (auto text : texts) {
     if (text == "") continue;
 
-    DrawText(text, 10, 10 + (20 * i++), 20, WHITE);
+    DrawText(text, 10, 10 + (Consts::FONT_SIZE * i++), Consts::FONT_SIZE, WHITE);
   }
 }
 
@@ -141,6 +148,7 @@ void Game::Update() {
   if ((score > best_score) && game_over) {
     best_score = score;
     WriteBestScore(best_score);
+    dashboard.setMedalByBestScores(best_score);
   }
 
   if (!is_started || game_over) {

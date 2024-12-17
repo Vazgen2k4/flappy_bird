@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "consts.h"
+#include "consts.hpp"
 #include "raylib.h"
 
 class SkyController {

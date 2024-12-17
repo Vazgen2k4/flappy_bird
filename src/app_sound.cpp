@@ -1,4 +1,4 @@
-#include "app_sound.h"
+#include "app_sound.hpp"
 
 Sound sfx_die;
 Sound sfx_hit;

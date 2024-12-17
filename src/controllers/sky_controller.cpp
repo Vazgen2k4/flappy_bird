@@ -1,4 +1,4 @@
-#include "sky_controller.h"
+#include "sky_controller.hpp"
 
 SkyController::SkyController() : speed(0), position(0), repetitions(0) {}
 
