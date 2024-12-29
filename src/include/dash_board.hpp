@@ -39,4 +39,6 @@ class DashBoard {
 
   void Draw(bool is_colider_mode, int scores, int best_scores);
   void Init();
+  
+  MedalType getMedalType() const;
 };

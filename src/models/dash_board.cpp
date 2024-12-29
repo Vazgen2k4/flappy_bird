@@ -85,3 +85,5 @@ void DashBoard::Draw(bool is_colider_mode, int scores, int best_scores) {
 void DashBoard::Init() {
   this->scoreboard = LoadTexture(Images::SCOREBOARD.c_str());
 }
+
+MedalType DashBoard::getMedalType() const { return medalType; }

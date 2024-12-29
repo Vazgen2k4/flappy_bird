@@ -63,3 +63,11 @@ class Images {
 
   static const std::vector<std::string> MEDAL_PATHS;
 };
+
+
+inline void InitRaylibForTests() {
+  InitWindow(800, 600, "Flappy Bird Test");
+  SetTargetFPS(60);
+}
+
+inline void CloseRaylibAfterTests() { CloseWindow(); }
