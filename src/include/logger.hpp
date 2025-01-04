@@ -22,6 +22,4 @@ class Logger {
   static void log_warning(const std::string& message);
   static void log_info(const std::string& message);
   static void close();
-  
-  
 };

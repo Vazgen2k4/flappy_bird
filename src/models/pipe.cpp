@@ -12,22 +12,16 @@ Pipe::Pipe(float x, PipeType type, float height, Texture2D& tail,
   hit_box = {x, y, (float)tail.width, height};
 }
 
-float Pipe::getX() const { return hit_box.x; }
-float Pipe::getY() const { return hit_box.y; }
 
-float Pipe::getWidth() const { return hit_box.width; }
-float Pipe::getHeight() const { return hit_box.height; }
 
 bool Pipe::isPassed() const { return passed; }
 void Pipe::setPassed(bool newPassed) { passed = newPassed; }
 
-void Pipe::setHeight(float newHeight) {}
+
 
 PipeType Pipe::getType() const { return type; }
 
-Rectangle Pipe::getHitBox() const { return hit_box; }
 
-void Pipe::setX(float newX) { hit_box.x = newX; }
 
 void Pipe::Draw(bool with_debug) const {
   Rectangle tail_sourse = {0, 0, (float)(tail.get().width),

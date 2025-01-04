@@ -5,12 +5,16 @@ const int Consts::WIN_WIDTH = 900;
 const int Consts::WIN_HEIGHT = 600;
 
 const string Consts::FILE_FOLDER = "flappy_data_vazgen/";
-const string Consts::LOGGER_FILE = FILE_FOLDER + "log.txt";
+const string Consts::LOGGER_FILE = FILE_FOLDER + "info.log";
 const string Consts::BEST_SCORE_FILE = FILE_FOLDER + "best.txt";
 const int Consts::MAX_ANGLE_ROTATE_UP = 70;
 const int Consts::MAX_ANGLE_ROTATE_DOWN = 30;
 
 const float Consts::SCALE_BIRD = 1.0;
+const int Consts::BIRD_HORIZONTAL_PERCENTILE = 33;
+
+const float Consts::BIRD_GRAVITY = 0.5f;
+const float Consts::BIRD_JUMP_STRENGTH = -10.0f;
 
 const float Consts::spawnInterval = 1.5f;
 const float Consts::pipeSpeed = 200.0f;

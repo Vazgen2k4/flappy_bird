@@ -1,7 +1,7 @@
 #pragma once
 
 // for Unix-подобных систем
-#include <sys/stat.h>  
+#include <sys/stat.h>
 
 #include <iostream>
 #include <string>
@@ -27,8 +27,15 @@ class Consts {
   static const string BEST_SCORE_FILE;
   static const int MAX_ANGLE_ROTATE_UP;
   static const int MAX_ANGLE_ROTATE_DOWN;
+  
   static const float SCALE_PIPE;
   static const float SCALE_BIRD;
+  static const int BIRD_HORIZONTAL_PERCENTILE;
+  static const float BIRD_GRAVITY;
+  static const float BIRD_JUMP_STRENGTH;
+
+
+
   static const float spawnInterval;
   static const float pipeSpeed;
   static const float pipeGap;
@@ -69,8 +76,8 @@ class Images {
 };
 
 inline void InitRaylibForTests() {
-  InitWindow(800, 600, "Flappy Bird Test");
-  SetTargetFPS(60);
+  InitWindow(10, 10, "Flappy Bird Test");
+  SetTargetFPS(1);
 }
 
 inline void CloseRaylibAfterTests() { CloseWindow(); }
