@@ -1,6 +1,5 @@
 *.exe
 *.dsym
 main
-.vscode/
 build/
 flappy_data*/

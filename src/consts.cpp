@@ -17,6 +17,16 @@ const float Consts::pipeSpeed = 200.0f;
 const float Consts::pipeGap = 120;
 const float Consts::LAND_HEIGT = 112;
 
+const int Consts::MEDAL_OFFSET_X = 31;
+const int Consts::MEDAL_OFFSET_Y = 112;
+
+const int Consts::WIDTH_COLIDER = 3;
+const int Consts::FONT_SIZE = 20;
+
+const int Consts::DashBoard_SCORES_DX = 175;
+const int Consts::DashBoard_SCORES_DY = 105;
+const int Consts::DashBoard_BEST_SCORES_DY = 145;
+
 // Определение статических переменных Colors
 const Color Colors::BG = {78, 192, 202, 255};
 

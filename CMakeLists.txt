@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
+cmake_policy(SET CMP0135 NEW)
 
 project(FlappyBird)
 
 set(CMAKE_CXX_STANDARD 14)
-set(RAYLIB_PATH "V:/program/msys_64/mingw64/include/raylib")
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Найти библиотеку raylib
+find_package(raylib REQUIRED)
 
 # Добавьте директории с заголовочными файлами
 include_directories(src/include ${RAYLIB_PATH}/include)
@@ -12,10 +15,11 @@ link_directories(${RAYLIB_PATH}/lib)
 
 # Собираем все файлы из src, исключая main.cpp
 file(GLOB_RECURSE ALL_SOURCES "src/*.cpp" "src/*.h")
-list(FILTER ALL_SOURCES EXCLUDE REGEX ".*main\\.cpp$")
-
 # Собираем тестовые файлы
-file(GLOB_RECURSE TEST_SOURCES "tests/*.cpp")
+file(GLOB_RECURSE TEST_SOURCES "tests/*.cpp" ${ALL_SOURCES})
+
+list(FILTER APP_SOURCES INCLUDE REGEX ".*main\\.cpp$")
+list(FILTER TEST_SOURCES EXCLUDE REGEX ".*main\\.cpp$")
 
 # Копируем ресурсы в директорию сборки
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
@@ -33,10 +37,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 # Создаем таргет для тестов
-add_executable(${PROJECT_NAME}_tests ${TEST_SOURCES} ${ALL_SOURCES})
+set(TESTS_RUN_FILE_NAME ${PROJECT_NAME}Tests)
 
-# Линкуем с библиотеками
-target_link_libraries(${PROJECT_NAME}_tests PRIVATE gtest gtest_main raylib)
-
-# Добавьте тесты в очередь CTest
-add_test(NAME RunTests COMMAND ${PROJECT_NAME}_tests)
+add_executable(${TESTS_RUN_FILE_NAME} ${TEST_SOURCES})
+target_link_libraries(${TESTS_RUN_FILE_NAME} PRIVATE gtest gtest_main raylib)
+add_test(NAME RunTests COMMAND ${TESTS_RUN_FILE_NAME})

@@ -47,7 +47,6 @@ bool DashBoard::setMedalTexture() {
 }
 
 bool DashBoard::setMedalByBestScores(int bestScores) {
-  // Проход по массиву и поиск подходящего значения
   for (const auto& threshold : thresholds) {
     if (bestScores >= threshold.score && this->medalType != threshold.medal) {
       this->medalType = threshold.medal;
@@ -55,7 +54,6 @@ bool DashBoard::setMedalByBestScores(int bestScores) {
     }
   }
 
-  // Если очки не подходят ни под один порог
   this->medalType = MedalType::NONE;
   return false;
 }
