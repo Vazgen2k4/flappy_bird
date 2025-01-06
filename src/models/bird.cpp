@@ -54,8 +54,7 @@ void Bird::Draw(bool with_debug) const {
 }
 
 void Bird::Reset() {
-  setX((Consts::WIN_WIDTH / 2 - getWidth() / 2) *
-       (Consts::BIRD_HORIZONTAL_PERCENTILE / 100));
+  setX((Consts::WIN_WIDTH / 2 - getWidth() / 2) * Consts::BIRD_HORIZONTAL_PERCENTILE);
   setY((Consts::WIN_HEIGHT / 2) - getHeight() / 2);
   angle = 0;
 }

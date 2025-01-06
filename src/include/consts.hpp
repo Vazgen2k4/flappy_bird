@@ -30,7 +30,7 @@ class Consts {
   
   static const float SCALE_PIPE;
   static const float SCALE_BIRD;
-  static const int BIRD_HORIZONTAL_PERCENTILE;
+  static const float BIRD_HORIZONTAL_PERCENTILE;
   static const float BIRD_GRAVITY;
   static const float BIRD_JUMP_STRENGTH;
 

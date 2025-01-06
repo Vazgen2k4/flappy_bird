@@ -6,29 +6,29 @@ project(FlappyBird)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Найти библиотеку raylib
+# Najít knihovnu raylib
 find_package(raylib REQUIRED)
 
-# Добавьте директории с заголовочными файлами
+# Přidat adresáře s hlavičkovými soubory
 include_directories(src/include ${RAYLIB_PATH}/include)
 link_directories(${RAYLIB_PATH}/lib)
 
-# Собираем все файлы из src, исключая main.cpp
+# Sestavit všechny soubory ze složky src kromě main.cpp
 file(GLOB_RECURSE ALL_SOURCES "src/*.cpp" "src/*.h")
-# Собираем тестовые файлы
+# Sestavit testovací soubory
 file(GLOB_RECURSE TEST_SOURCES "tests/*.cpp" ${ALL_SOURCES})
 
 list(FILTER APP_SOURCES INCLUDE REGEX ".*main\\.cpp$")
 list(FILTER TEST_SOURCES EXCLUDE REGEX ".*main\\.cpp$")
 
-# Копируем ресурсы в директорию сборки
+# Kopírovat zdroje do adresáře sestavení
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
-# Создаем основной исполняемый файл
+# Vytvořit hlavní spustitelný soubor
 add_executable(${PROJECT_NAME} ${ALL_SOURCES})
 target_link_libraries(${PROJECT_NAME} raylib)
 
-# Добавляем Google Test как внешнюю библиотеку
+# Přidat Google Test jako externí knihovnu
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -36,7 +36,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-# Создаем таргет для тестов
+# Vytvořit cíl pro testy
 set(TESTS_RUN_FILE_NAME ${PROJECT_NAME}Tests)
 
 add_executable(${TESTS_RUN_FILE_NAME} ${TEST_SOURCES})

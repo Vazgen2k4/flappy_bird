@@ -14,8 +14,8 @@ enum MedalType {
 };
 
 struct MedalThreshold {
-  int score;        // Порог очков
-  MedalType medal;  // Соответствующая медаль
+  int score;       
+  MedalType medal;  
 };
 
 class DashBoard {
@@ -23,7 +23,7 @@ class DashBoard {
   MedalType medalType;
   Texture2D scoreboard;
   Texture2D medal;
-  // Массив с порогами и медалями
+  
   static const std::vector<MedalThreshold> thresholds;
   static const int width = 236;
   static const int height = 280;

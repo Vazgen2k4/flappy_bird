@@ -12,7 +12,7 @@ void Logger::initialize(const std::string& file) {
   log_file.open(file_path, std::ios::out | std::ios::app);
 
   if (!log_file.is_open()) {
-    std::cerr << "Ошибка открытия файла для логирования: " << file_path
+    std::cerr << "Error opening file for logging: " << file_path
               << std::endl;
   }
 }

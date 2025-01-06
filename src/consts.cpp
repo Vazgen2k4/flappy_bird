@@ -1,6 +1,6 @@
 #include "consts.hpp"
 
-// Определение статических переменных Consts
+
 const int Consts::WIN_WIDTH = 900;
 const int Consts::WIN_HEIGHT = 600;
 
@@ -11,7 +11,7 @@ const int Consts::MAX_ANGLE_ROTATE_UP = 70;
 const int Consts::MAX_ANGLE_ROTATE_DOWN = 30;
 
 const float Consts::SCALE_BIRD = 1.0;
-const int Consts::BIRD_HORIZONTAL_PERCENTILE = 33;
+const float Consts::BIRD_HORIZONTAL_PERCENTILE = .33;
 
 const float Consts::BIRD_GRAVITY = 0.5f;
 const float Consts::BIRD_JUMP_STRENGTH = -10.0f;
@@ -31,10 +31,10 @@ const int Consts::DashBoard_SCORES_DX = 175;
 const int Consts::DashBoard_SCORES_DY = 105;
 const int Consts::DashBoard_BEST_SCORES_DY = 145;
 
-// Определение статических переменных Colors
+
 const Color Colors::BG = {78, 192, 202, 255};
 
-// Определение статических переменных Images
+
 const string Images::IMAGES_FOLDER = "assets/images/";
 const string Images::BIRD = Images::IMAGES_FOLDER + "bird-01.png";
 const string Images::LAND = Images::IMAGES_FOLDER + "land.png";
@@ -58,11 +58,11 @@ void Consts::CreateDirectoryIfNotExists(const std::string& dir) {
 
   if (stat(dir.c_str(), &info) != 0) {
     if (mkdir(dir.c_str()) != 0) {
-      std::cerr << "Ошибка создания директории: " << dir << std::endl;
+      std::cerr << "Error creating directory:" << dir << std::endl;
     }
   } else if (info.st_mode & S_IFDIR) {
-    std::cout << "Директория уже существует: " << dir << std::endl;
+    std::cout << "Directory already exists:" << dir << std::endl;
   } else {
-    std::cerr << "Ошибка: файл с таким именем уже существует." << std::endl;
+    std::cerr << "Error: A file with this name already exists." << std::endl;
   }
 }

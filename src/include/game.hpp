@@ -11,7 +11,7 @@
 
 class Game {
  public:
-  // Конструктор и деструктор
+  
   Game(std::string app_icon, std::string title, int FPS);
   ~Game();
 
@@ -28,7 +28,7 @@ class Game {
   void RestartGame();
 
  private:
-  // Члены класса
+  
   std::string app_icon_path;
   std::string title;
   Image icon;
@@ -46,19 +46,19 @@ class Game {
   bool game_over = false;
   bool is_collider_mode = false;
 
-  // Приватные методы
-  // Обработка ввода
+  
+  
   void HandleInput();
-  // Сброс игры
+  
 
-  // Обновление состояния игры
+  
   void Update();
-  // Отрисовка всех элементов
+  
   void Draw();
-  // dsds
+  
   void DrawTextInCorner(vector<const char*> texts);
-  // Отрисовка земли
+  
   void DrawLand();
-  // Центрированная отрисовка текстуры
+  
   void DrawTextureCenter(Texture2D texture, Color color);
 };
