@@ -2,8 +2,9 @@
 #include "dash_board.hpp"
 
 #include <gtest/gtest.h>
-
 #include "consts.hpp"
+#include "test_constants.hpp"
+
 
 TEST(DashBoardTest, Constructor) {
   InitRaylibForTests();

@@ -5,7 +5,8 @@
 #include "consts.hpp"
 #include "raylib.h"
 
-const char* birdTexturePath = "assets/images/bird-01.png";
+#include "test_constants.hpp"
+
 
 TEST(BirdTest, Constructor) {
   InitRaylibForTests();

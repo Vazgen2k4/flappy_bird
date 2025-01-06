@@ -1,14 +1,13 @@
 #pragma once
 #include <string>
 
-#include "raylib.h"
-
 #include "app_sound.hpp"
 #include "bird.hpp"
 #include "consts.hpp"
-#include "pipe_controller.hpp"
-#include "sky_controller.hpp"
 #include "dash_board.hpp"
+#include "pipe_controller.hpp"
+#include "raylib.h"
+#include "sky_controller.hpp"
 
 class Game {
  public:
@@ -16,11 +15,17 @@ class Game {
   Game(std::string app_icon, std::string title, int FPS);
   ~Game();
 
-  // Запуск игры
+  bool isStarted() const { return is_started; }
+  bool isGameOver() const { return game_over; }
+  int getScore() const { return score; }
+
+  int ReadBestScore();
+  void WriteBestScore(int score);
+
   void Run();
 
-  // Инициализация объектов игры
-  void Init(Bird* bird, PipeController* controller/* , DashBoard* dashboard */);
+  void Init(Bird* bird, PipeController* controller);
+  void RestartGame();
 
  private:
   // Члены класса
@@ -32,9 +37,9 @@ class Game {
   Bird* bird;
   PipeController* controller;
   SkyController sky_controller;
-  
+
   DashBoard dashboard;
-  
+
   int score = 0;
   int best_score = 0;
   bool is_started = false;
@@ -45,7 +50,7 @@ class Game {
   // Обработка ввода
   void HandleInput();
   // Сброс игры
-  void RestartGame();
+
   // Обновление состояния игры
   void Update();
   // Отрисовка всех элементов
@@ -56,7 +61,4 @@ class Game {
   void DrawLand();
   // Центрированная отрисовка текстуры
   void DrawTextureCenter(Texture2D texture, Color color);
-
-  int ReadBestScore();
-  void WriteBestScore(int score);
 };
