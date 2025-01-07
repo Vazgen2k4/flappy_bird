@@ -1,4 +1,4 @@
-#include "logger.h"
+#include "logger.hpp"
 
 bool Logger::with_file = false;
 std::string Logger::file_path = "";
@@ -7,10 +7,12 @@ std::ofstream Logger::log_file;
 void Logger::initialize(const std::string& file) {
   file_path = file;
   with_file = true;
+
+  Consts::CreateDirectoryIfNotExists(Consts::FILE_FOLDER);
   log_file.open(file_path, std::ios::out | std::ios::app);
 
   if (!log_file.is_open()) {
-    std::cerr << "Ошибка открытия файла для логирования: " << file_path
+    std::cerr << "Error opening file for logging: " << file_path
               << std::endl;
   }
 }
@@ -33,7 +35,6 @@ void Logger::write_log(const std::string& prefix, const std::string& message) {
 
   std::cout << prefix << "[" << std::put_time(&now_tm, "%H:%M:%S") << "] "
             << message << std::endl;
-  ;
 }
 
 void Logger::log(const std::string& message) { write_log("[LOG]: ", message); }

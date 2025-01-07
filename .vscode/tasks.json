@@ -1,0 +1,54 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build FlappyBird",
+        "type": "shell",
+        "command": "cmake",
+        "args": [
+          "--build",
+          "${workspaceFolder}/build",
+          "--config",
+          "Debug",
+          "--target",
+          "FlappyBird"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Сборка основного исполняемого файла FlappyBird"
+      },
+      {
+        "label": "Build FlappyBird Tests",
+        "type": "shell",
+        "command": "cmake",
+        "args": [
+          "--build",
+          "${workspaceFolder}/build",
+          "--config",
+          "Debug",
+          "--target",
+          "FlappyBirdTests"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": false
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Сборка тестов FlappyBird"
+      },
+      {
+        "label": "Run Tests",
+        "type": "shell",
+        "command": "${workspaceFolder}/build/FlappyBirdTests",
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+        "problemMatcher": []
+      }
+    ]
+  }
+  

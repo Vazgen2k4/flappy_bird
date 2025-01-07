@@ -1,4 +1,4 @@
-#include "app_sound.h"
+#include "app_sound.hpp"
 
 Sound sfx_die;
 Sound sfx_hit;
@@ -15,32 +15,31 @@ void InitSounds() {
   sfx_swooshing = LoadSound((sound_folder + "sfx_swooshing.ogg").c_str());
   sfx_wing = LoadSound((sound_folder + "sfx_wing.ogg").c_str());
 }
-
 bool IsSoundReadyAndPlay(Sound sound, const std::string& soundName) {
   if (!IsAudioDeviceReady()) {
-    Logger::log_error("Ошибка инициализации аудиоустройства!");
+    Logger::log_error("Audio device initialization error!");
     return false;
   }
 
   if (!IsSoundReady(sound)) {
-    Logger::log_error("Звук " + soundName + " не готов к воспроизведению!");
+    Logger::log_error("Sound " + soundName + " is not ready to play!");
     return false;
   }
 
   PlaySound(sound);
-  Logger::log_info("Воспроизведение звука " + soundName + "...");
+  Logger::log_info("Playing sound " + soundName + "...");
   return true;
 }
 
-void PlayDeathSound() { IsSoundReadyAndPlay(sfx_die, "смерти"); }
+void PlayDeathSound() { IsSoundReadyAndPlay(sfx_die, "death"); }
 
-void PlayHitSound() { IsSoundReadyAndPlay(sfx_hit, "удара"); }
+void PlayHitSound() { IsSoundReadyAndPlay(sfx_hit, "hit"); }
 
-void PlayPointSound() { IsSoundReadyAndPlay(sfx_point, "очка"); }
+void PlayPointSound() { IsSoundReadyAndPlay(sfx_point, "point"); }
 
-void PlaySwooshingSound() { IsSoundReadyAndPlay(sfx_swooshing, "свиста"); }
+void PlaySwooshingSound() { IsSoundReadyAndPlay(sfx_swooshing, "swoosh"); }
 
-void PlayWingSound() { IsSoundReadyAndPlay(sfx_wing, "крыльев"); }
+void PlayWingSound() { IsSoundReadyAndPlay(sfx_wing, "wing"); }
 
 void UnloadSounds() {
   UnloadSound(sfx_die);

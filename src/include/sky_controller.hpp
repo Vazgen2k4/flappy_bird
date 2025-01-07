@@ -2,12 +2,15 @@
 
 #include <string>
 
-#include "consts.h"
+#include "consts.hpp"
 #include "raylib.h"
 
 class SkyController {
  public:
   SkyController();
+  ~SkyController();
+  
+  
   void Update();
   void Init(std::string icon, float speed, float y);
   void Draw();
@@ -17,4 +20,5 @@ class SkyController {
   float speed;
   float position;
   float y;
+  int repetitions;
 };

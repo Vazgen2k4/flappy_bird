@@ -5,6 +5,8 @@
 #include <chrono>
 #include <iomanip>
 
+#include "consts.hpp"
+
 class Logger {
  private:
   static bool with_file;
